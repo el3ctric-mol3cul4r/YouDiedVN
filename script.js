@@ -58,7 +58,7 @@ const story = [
     {
         speaker: "You",
         bg: "images/marcusdesk.jpg",
-        text: "Damn fool."
+        text: "What a fool."
     },
     {
         speaker: "You",
@@ -70,11 +70,11 @@ const story = [
         choice: true,
         options: [
             {
-                text: "Yes, it would benefit the T-virus research.",
-                effect: () => { influencePoints++; console.log("Influence:", influencePoints); lastChoice = "influence"; spriteVisible: false;},
+                text: "Yes, it would be beneficial for future research.",
+                effect: () => { influencePoints++; console.log("Influence:", influencePoints); lastChoice = "influence"; spriteContainer.classList.add("hidden");},
             },
             {
-                text: "No.",
+                text: "No, I should use my own research.",
                 effect: () => { moralityPoints++; console.log("Morality:", moralityPoints); lastChoice = "morality";}
             }
         ]
@@ -101,7 +101,7 @@ const story = [
         text: "End of chapter 1."
     },
 
-    // Chapter 2
+    // chapter 2
     {
         chapter: 2,
         speaker: "William Birkin",
@@ -123,7 +123,7 @@ const story = [
     {
         speaker: "William Birkin",
         bg: "images/umbrelladay.jpg",
-        text: "Alongside the research you.. “Acquired” from Marcus yesterday. This should be good!"
+        text: "Alongside the research you.. “acquired” from Marcus yesterday. This should be good!"
     },
     {
         speaker: "William Birkin",
@@ -143,7 +143,197 @@ const story = [
         branch: true,
         text1: "Great! Let’s get to work then!",
         text2: "You’re such a stickler, Al. I’ll go snatch it now. Meet you at the lab!",
-    }
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab.jpg",
+        spriteVisible: false,
+        text: "What was in the research, Birkin?"
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab.jpg",
+        extra: "Note: The t-virus prototype, developed by James Marcus, is a virus capable of necrosis.",
+        text: "The information on the t-virus. I’m currently creating a sample of it."
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab.jpg",
+        text: "And how do you plan to satisfy Spencer’s idea of using the ebola sample?"
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab.jpg",
+        extra: "Note: The t-virus was developed using leech DNA and a pre-existing virus, the progenitor virus.",
+        text: "I was just about to ask you… Should we splice its genes and insert them into the t-virus?"
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab.jpg",
+        extra: "Note: The t-virus was initially created with the goal of creating illegal bioweapons...",
+        text: "Or rather, should we just leave the t-virus strain as is and reduce potential risks?"
+    },
+    {
+        choice: true,
+        options: [
+            {
+                text: "Use the ebola sample.",
+                effect: () => { influencePoints++; console.log("Influence:", influencePoints); lastChoice = "influence";},
+            },
+            {
+                text: "Keep the strain pure.",
+                effect: () => { moralityPoints++; console.log("Morality:", moralityPoints); lastChoice = "morality";}
+            }
+        ]
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab.jpg",
+        branch: true,
+        text1: "Splice the ebola genes. Not only will this please Spencer, but effectiveness will increase.",
+        text2: "Keep the t-virus strain pure. It doesn’t need all those symptoms.",
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab.jpg",
+        branch: true,
+        text1: "Agreed. I’ll work on that ASAP!",
+        text2: "Boo. I’m adding ebola anyway. Don’t want to get in trouble with our boss…",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab.jpg",
+        text: "..."
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab.jpg",
+        text: "Do you believe the ebola will increase necrosis capabilities?"
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab.jpg",
+        text: "Perhaps. Hopefully this satisfies Spencer enough so he’s not on our backs about using the virus to create zombies rather than… To kill."
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab.jpg",
+        text: "He’s blind if he can’t recognize the benefits we could reap from a regenerative virus."
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab.jpg",
+        text: "But honestly, I wouldn’t be surprised if he was upset. He is old and feeble-minded, corrupt and weak. An imbecile."
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab.jpg",
+        text: "The future of Umbrella lies in our hands, Birkin. I hope you recognize that."
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab.jpg",
+        text: "Of course I do, Al! Hence why we should take over the company!"
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab.jpg",
+        text: "Precisely. We need to start working on human experimentation."
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab.jpg",
+        extra: "Note: James Marcus experimented on mediocre company trainees to develop the t-virus prototype.",
+        text: "Are you sure? Marcus got in hot water yesterday because of that…"
+    },
+    {
+        choice: true,
+        options: [
+            {
+                text: "Yes, human experimentation is needed.",
+                effect: () => { influencePoints++; console.log("Influence:", influencePoints); lastChoice = "influence";},
+            },
+            {
+                text: "No, maybe animal experimentation will work.",
+                effect: () => { moralityPoints++; console.log("Morality:", moralityPoints); lastChoice = "morality";}
+            }
+        ]
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab.jpg",
+        branch: true,
+        text1: "Birkin, the t-virus requires human subjects. A puny animal would be unable to handle such a magnificent pathogen.",
+        text2: "Well, perhaps animal experimentation will suffice.",
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab.jpg",
+        branch: true,
+        text1: "I don't know... I'm not risking it. Not this early.",
+        text2: "Well.. On second thought, maybe we should go with a third option.",
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab.jpg",
+        extra: "Yes, this is actually canon.",
+        text: "I'll experiment on human embryos. It should be less risky.",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab.jpg",
+        text: "Suit yourself. Hand me the sample once you've finished combining it with ebola.",
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab.jpg",
+        text: "Aye aye, captain!",
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab.jpg",
+        extra: "A few hours later...",
+        text: "...",
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab2.jpg",
+        text: "Actually, I just finished. Here it is in all its glory.",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab2.jpg",
+        sprite: "assets/tvirus.jpg",  
+        spriteVisible: true,
+        text: "It’s a fine sample, Birkin. Nice work.",
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab2.jpg",
+        text: "Thank you. I’ve dubbed it the Beta strain.",
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab2.jpg",
+        text: "It bypasses the immune system much better.",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab2.jpg",
+        text: "This means…",
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrellalab2.jpg",
+        text: "Yup! We’ll be able to create large-scale bioweapons that will do our bidding!",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab2.jpg",
+        text: "Excellent.",
+    },
+
+    // chapter 3
 ];
 
 
