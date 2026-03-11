@@ -1,6 +1,7 @@
 let moralityPoints = 0;
 let influencePoints = 0;
 let index = 0;
+let lastChoice = null;
 
 let textBox = document.getElementById("mainText");
 let speakerName = document.getElementById("speakerName");
@@ -27,6 +28,7 @@ const story = [
         bg: "images/flashback.jpg",
         sprite: "sprites/JamesMarcus.jpg",  
         spriteVisible: true,
+        extra: "Note: This is a flashback to 1978.",
         text: "As the co-founder of Umbrella, I couldn't help but notice how you two excelled at the Umbrella Executive Training Center."
     },
     {
@@ -37,6 +39,7 @@ const story = [
     {
         speaker: "James Marcus",
         bg: "images/flashback.jpg",
+        extra: "Fast forward to a few years after.",
         text: "I look forward to working with you two at the prestigious Arklay Laboratory."
     },
     {
@@ -68,12 +71,11 @@ const story = [
         options: [
             {
                 text: "Yes, it would benefit the T-virus research.",
-                effect: () => { influencePoints++; console.log("Influence:", influencePoints);},
-                spriteVisible: false,
+                effect: () => { influencePoints++; console.log("Influence:", influencePoints); lastChoice = "influence"; spriteVisible: false;},
             },
             {
                 text: "No.",
-                effect: () => { moralityPoints++; console.log("Morality:", moralityPoints); }
+                effect: () => { moralityPoints++; console.log("Morality:", moralityPoints); lastChoice = "morality";}
             }
         ]
     },
@@ -106,7 +108,7 @@ const story = [
         bg: "images/umbrelladay.jpg",
         sprite: "sprites/WilliamBirkin1.jpg",  
         spriteVisible: true,
-        text: "Good mythical morning! You heard what Umbrella suggested, right?"
+        text: "Good mythical morning! You heard what Spencer suggested, right?"
     },
     {
         speaker: "You",
@@ -123,6 +125,25 @@ const story = [
         bg: "images/umbrelladay.jpg",
         text: "Alongside the research you.. “Acquired” from Marcus yesterday. This should be good!"
     },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrelladay.jpg",
+        text: "You did get your hands on it... Right?"
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrelladay.jpg",
+        branch: true,
+        text1: "Yes, of course. It is insanely valuable.",
+        text2: "No… We can manage on our own. I would never willingly take another’s research.",
+    },
+    {
+        speaker: "William Birkin",
+        bg: "images/umbrelladay.jpg",
+        branch: true,
+        text1: "Great! Let’s get to work then!",
+        text2: "You’re such a stickler, Al. I’ll go snatch it now. Meet you at the lab!",
+    }
 ];
 
 
@@ -131,7 +152,9 @@ const spriteContainer = sprite.parentElement;
 
 function renderScene() {
   let scene = story[index];
-  if (scene.choice) { showChoices(scene); return; }
+  if (scene.choice) { 
+    showChoices(scene); return; 
+  }
 
   if (scene.chapter) {
     sceneCrest.innerText = `✦ Chapter ${scene.chapter} ✦`;
@@ -147,9 +170,15 @@ function renderScene() {
     spriteContainer.classList.add("hidden");
   }
 
-  textBox.innerText = scene.text;
-  showHint(scene);
-  showExtra(scene);    
+  
+  if (scene.branch) {
+    let branchText = lastChoice === "morality" ? scene.text2 : scene.text1;
+    textBox.innerText = branchText;
+  } else {
+    textBox.innerText = scene.text;
+    showHint(scene);
+    showExtra(scene); 
+  }
 }
 
 nextButton.onclick = function () {
