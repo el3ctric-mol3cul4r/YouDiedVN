@@ -864,6 +864,186 @@ const story = [
         hint: "Reminder: Wesker suggested experimentation on large animals that would have greater chances of becoming bioweapons.",
         text: "I started moving onto larger animals, like you had suggested earlier.",
     },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellalab2.jpg",
+        text: "It would’ve been fine if one of them hadn’t escaped.",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellalab2.jpg",
+        text: "Now thousands of animals are vectors for the virus, Birkin.",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab2.jpg",
+        text: "Spencer’s going to be pissed… This is really bad.",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellalab2.jpg",
+        text: "Really? You just realized that now?",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab2.jpg",
+        text: "We should go talk to Spencer, Dr. Sarcastic.",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellalab2.jpg",
+        text: "It is your funeral, dearest Birkin.",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellameeting.jpg",
+        spriteVisible: false,
+        text: "Dr. Spencer?...",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/umbrellameeting.jpg",
+        text: "I’m so nervous. I’m not sure what he’s going to say.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/umbrellameeting.jpg",
+        text: "Not to mention my job, and perhaps life, is on the line…",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/umbrellameeting.jpg",
+        text: "Given his track record of assassinating his rivals and even colleagues…",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        sprite: "sprites/OswellESpencer.jpg",
+        spriteVisible: true,
+        text: "Ah, good evening, Dr. Birkin.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/umbrellameeting.jpg",
+        text: "Why doesn’t he just get to the point?.. He’s always so ominous…",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        text: "You’re here to speak to me about the leak of the beta virus, correct?",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/umbrellameeting.jpg",
+        text: "How does he know?",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        text: "Raccoon City is littered with clones of the dog you first experimented on. Cerberus.",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        extra: "Raccoon City is a fictional city in the midwest where the Resident Evil games take place.",
+        text: "And now people are starting to inch closer to figuring us out, Birkin boy.",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellameeting.jpg",
+        text: "I’m sorry I made such a grave mistake, sir. I was just trying to foster the advancement of the t-virus prototype.",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        text: "Oh, I’m sure. But now you and Wesker here are going to have to clean up this mess.",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellameeting.jpg",
+        text: "I’ll handle it. Birkin already worked on the majority of the strain.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/umbrellameeting.jpg",
+        text: "!...",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/umbrellameeting.jpg",
+        text: "Since when has he been so generous?..",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        text: "Fine by me. Actually, it works out perfectly, Birkin boy.",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        extra: "Wesker is the captain of a specialized unit for dangerous cases, S.T.A.R.S.",
+        text: "Your friend Wesker here works for the RPD. He can use his position to erase the traces of us at the crime scene…",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellameeting.jpg",
+        text: "Enough taunting, Spencer. What do I have to do?",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        text: "Lure your little S.T.A.R.S team to my mansion out in the woods.",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        text: "The police have been searching in the forest, where the dogs are.",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        text: "Destroy the remaining evidence there…",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        text: "And the underground lab.",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        text: "Do all of that after you feed your S.T.A.R.S. team to your latest bioweapon.",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellameeting.jpg",
+        text: "The Tyrant!",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        text: "Yes. It will be beneficial for combat data.",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellameeting.jpg",
+        text: "When will this occur?",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        text: "X-day.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/umbrellameeting.jpg",
+        text: "I have a bad feeling about this plan… Not to mention it’ll put Wesker in danger.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/umbrellameeting.jpg",
+        text: "Should I object to it?...",
+    },
 ];
 
 
