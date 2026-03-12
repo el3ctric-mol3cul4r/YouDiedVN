@@ -9,6 +9,7 @@ const soundeffects = {
     phone: new Audio("audio/phonering.mp3"),
     hangup: new Audio("audio/hangup.mp3"),
     pistol: new Audio("audio/pistol.mp3"),
+    dog: new Audio("audio/dog.mp3"),
 };
 
 let textBox = document.getElementById("mainText");
@@ -804,6 +805,64 @@ const story = [
         speaker: "",
         bg: "images/marcusdesk.jpg",
         text: "End of Chapter 3.",
+    },
+
+
+    //chapter 4
+    {
+        chapter: 4,
+        speaker: "Albert Wesker",
+        bg: "images/umbrellalab2.jpg",
+        sprite: "sprites/AlbertWesker1",
+        extra: "This is a few months later, after the tyrant project has commenced.",
+        text: "Birkin.",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab2.jpg",
+        text: "What’s the issue, Wesker? You seem… On edge.",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellalab2.jpg",
+        text: "Have you been testing the beta strain on animals, Birkin?",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab2.jpg",
+        text: "Maybe I have. Why?",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellalab2.jpg",
+        sound: "audio/dog.mp3",
+        text: "…",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellalab2.jpg",
+        text: "Do you hear that, Birkin?",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellalab2.jpg",
+        text: "The consequences of your own actions are about to knock down the damned door.",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellalab2.jpg",
+        text: "I thought you were only experimenting on human embryos.",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab2.jpg",
+        text: "…",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab2.jpg",
+        hint: "Reminder: Wesker suggested experimentation on large animals that would have greater chances of becoming bioweapons.",
+        text: "I started moving onto larger animals, like you had suggested earlier.",
     },
 ];
 
