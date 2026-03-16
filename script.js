@@ -10,6 +10,9 @@ const soundeffects = {
     hangup: new Audio("audio/hangup.mp3"),
     pistol: new Audio("audio/pistol.mp3"),
     dog: new Audio("audio/dog.mp3"),
+    pistol2: new Audio("audio/pistol2.mp3"),
+    tyrant: new Audio("audio/tyrant.mp3"),
+    impalement: new Audio("audio/impalement.mp3"),
 };
 
 let textBox = document.getElementById("mainText");
@@ -28,6 +31,9 @@ hintLine.setAttribute("hidden", "hidden");
 extraLine.setAttribute("hidden", "hidden");
 b1.setAttribute("hidden", "hidden");
 b2.setAttribute("hidden", "hidden");
+
+const sprite = document.getElementById("characterSprite");
+const spriteContainer = sprite.parentElement;
 
 const story = [
     // chapter 1
@@ -1044,11 +1050,475 @@ const story = [
         bg: "images/umbrellameeting.jpg",
         text: "Should I object to it?...",
     },
-];
+    {
+        choice: true,
+        options: [
+            {
+                text: "Say nothing.",
+                effect: () => { influencePoints++; console.log("Influence:", influencePoints); lastChoice = "influence";},
+            },
+            {
+                text: "Yes, this plan is extremely risky and wrong.",
+                effect: () => { moralityPoints++; console.log("Morality:", moralityPoints); lastChoice = "morality";}
+            }
+        ]
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellameeting.jpg",
+        branch: true,
+        text1: "Sounds good.",
+        text2: "I don’t know… Not only is it cruel, but it’s also really dangerous for Wesker.",
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        branch: true,
+        text1: "Good. I’m glad you both are prepped for it.",
+        text2: "You’ve become soft-hearted. Focus on the future of Umbrella, Birkin.",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellameeting.jpg",
+        branch: true,
+        hint: "Wesker will remember that.",
+        text1: "…Of course.",
+        text2: "…Thank you for your concern.",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellameeting.jpg",
+        text: "…I will start working on the details, Spencer.",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/umbrellameeting.jpg",
+        branch: true,
+        text1: "…",
+        text2: "Just... Leave Birkin alone for now."
+    },
+    {
+        speaker: "Oswell E. Spencer",
+        bg: "images/umbrellameeting.jpg",
+        extra: "Fast forward two weeks later...",
+        text: "Very well. Get to work, boys.",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/black.jpg",
+        sound: "audio/phonering.mp3",
+        spriteVisible: false,
+        text: "...",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/black.jpg",
+        text: "Hello?",
+    },
+    {
+        speaker: "???",
+        bg: "images/black.jpg",
+        text: "Privyet. You will betray Umbrella tomorrow, da?",
+    },
+    {
+        speaker: "Albert Wesker",
+        bg: "images/black.jpg",
+        text: "Yes, Sergei. I will deliver the embryos to your company ASAP.",
+    },
+    {
+        speaker: "Sergei Vladimir",
+        bg: "images/black.jpg",
+        text: "Good.",
+    },
+    {
+        speaker: "",
+        bg: "images/black.jpg",
+        text: "End of Chapter 4."
+    },
 
 
-const sprite = document.getElementById("characterSprite");
-const spriteContainer = sprite.parentElement;
+    // chapter 5
+    {
+        chapter: 5,
+        speaker: "Jill Valentine",
+        bg: "images/dining_hall.jpg",
+        sprite: "sprites/JillValentine1.jpg",
+        spriteVisible: true,
+        hint: "Remember, Wesker is the Captain of the RPD S.T.A.R.S unit, in charge of dangerous missions.",
+        text: "Captain, I’m glad you found this mansion!",
+    },
+    {
+        speaker: "Jill Valentine",
+        bg: "images/dining_hall.jpg",
+        spriteVisible: false,
+        sprite: "sprites/JillValentine2.jpg",
+        spriteVisible: true,
+        text: "But I can’t help but wonder where the Bravo team is… Maybe we should go out and look for them. It feels wrong to stay here…",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/dining_hall.jpg",
+        text: "How naive can she possibly be? She really deserves to be a test subject for the Tyrant.",
+    },
+    {
+        speaker: "Jill Valentine",
+        bg: "images/black.jpg",
+        spriteVisible: false,
+        text: "...",
+    },
+    {
+        speaker: "You",
+        bg: "images/doors.jpg",
+        sprite: "sprites/JillValentine1.jpg",
+        spriteVisible: true,
+        text: "Jill… Jill! Don’t open that door! You got a death wish, woman? They’re part of the STARS team. They can manage on their own.",
+    },
+    {
+        speaker: "You",
+        bg: "images/doors.jpg",
+        text: "And if not…",
+    },
+    {
+        choice: true,
+        options: [
+            {
+                text: "They deserve to die.",
+                effect: () => { influencePoints++; console.log("Influence:", influencePoints); lastChoice = "influence";},
+            },
+            {
+                text: "They're not cut out for this.",
+                effect: () => { moralityPoints++; console.log("Morality:", moralityPoints); lastChoice = "morality";}
+            }
+        ]
+    },
+    {
+        speaker: "You",
+        bg: "images/doors.jpg",
+        branch: true,
+        text1: "They deserve to die. Natural selection, after all.",
+        text2: "Maybe they don't deserve their positions.",
+    },
+    {
+        speaker: "Jill Valentine",
+        bg: "images/doors.jpg",
+        spriteVisible: false,
+        sprite: "sprites/JillValentine2.jpg",
+        spriteVisible: true,
+        text: "…",
+    },
+    {
+        speaker: "Barry Burton",
+        bg: "images/doors.jpg",
+        sprite: "sprites/BarryBurton1.jpg",
+        spriteVisible: true,
+        text: "That’s extreme, Captain. I’m not one to question, but you gotta have some respect for her.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/doors.jpg",
+        text: "Barry. Don’t get out of line. You know damn well you’re here to assist me.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/doors.jpg",
+        text: "Either that, or I kill your entire family and feed them to the Tyrant.",
+    },
+    {
+        speaker: "Barry Burton",
+        bg: "images/doors.jpg",
+        spriteVisible: false,
+        sprite: "sprites/BarryBurton2.jpg",
+        spriteVisible: true,
+        text: "…",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/doors.jpg",
+        text: "Good. He caught the look I gave him. Poor fool.",
+    },
+    {
+        speaker: "You",
+        bg: "images/doors.jpg",
+        spriteVisible: false,
+        text: "As your captain, I do not expect you to question my authority. And I will not tolerate it.",
+    },
+    {
+        speaker: "You",
+        bg: "images/doors.jpg",
+        text: "Understood?",
+    },
+    {
+        speaker: "Barry/Jill/Chris",
+        bg: "images/doors.jpg",
+        text: "Yes, sir!",
+    },
+    {
+        speaker: "You",
+        bg: "images/doors.jpg",
+        text: "Good. I want you all to split up and look around the mansion for any insights into what could’ve possibly caused the virus outside.",
+    },
+    {
+        speaker: "You",
+        bg: "images/doors.jpg",
+        text: "I want a full report on clues as soon as possible.",
+    },
+    {
+        speaker: "Chris Redfield",
+        bg: "images/doors.jpg",
+        sprite: "sprites/ChrisRedfield1.jpg",
+        spriteVisible: true,
+        text: "Where will you be, Captain Wesker?",
+    },
+    {
+        speaker: "You",
+        bg: "images/doors.jpg",
+        text: "I’m not sure. I’ll go downstairs to scan the darkest areas of the mansion.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/doors.jpg",
+        text: "He’s as stupid as everyone else. I’m lying, of course.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/doors.jpg",
+        text: "I have more… Pressing matters to attend to in the basement.",
+    },
+    {
+        speaker: "You",
+        bg: "images/doors.jpg",
+        text: "Now go. I’m counting on all of you.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/lab1.jpg",
+        spriteVisible: false,
+        text: "The Tyrant seems primed and ready to go. Now we play the waiting game.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/lab1.jpg",
+        text: "Those poor idiots. They must be shaking from the fear.",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrella.gif",
+        text: "...Day-X starts now.",
+    },
+    {
+        speaker: "You",
+        bg: "images/black.jpg",
+        text: "...",
+    },
+    {
+        speaker: "Jill Valentine",
+        bg: "images/black.jpg",
+        text: "Captain Wesker?",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/lab2.jpg",
+        text: "Finally. It’s been hours since I left them.",
+    },
+    {
+        speaker: "Jill Valentine",
+        bg: "images/lab2.jpg",
+        sprite: "sprites/JillValentine2.jpg",
+        spriteVisible: true,
+        text: "What are you doing?",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/black.jpg",
+        text: "...",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/lab3.jpg",
+        sprite: "assets/pistol.jpg",
+        spriteVisible: true,
+        text: "...This, dearheart.",
+    },
+    {
+        speaker: "Jill Valentine",
+        bg: "images/lab3.jpg",
+        text: "Captain! You bastard!",
+    },
+    {
+        speaker: "You",
+        bg: "images/lab3.jpg",
+        text: "Shut up. Where is Chris?",
+    },
+    {
+        speaker: "Jill Valentine",
+        bg: "images/lab3.jpg",
+        text: "We got separated. I don’t know!",
+    },
+    {
+        speaker: "Chris Redfield",
+        bg: "images/lab3.jpg",
+        spriteVisible: false,
+        text: "Wesker!...",
+    },
+    {
+        speaker: "Chris Redfield",
+        bg: "images/lab4.jpg",
+        text: "What the hell is this?",
+    },
+    {
+        speaker: "You",
+        bg: "images/lab4.jpg",
+        sprite: "assets/pistol2.jpg",
+        spriteVisible: true,
+        text: "None of your damn business.",
+    },
+    {
+        speaker: "Barry Burton",
+        bg: "images/lab4.jpg",
+        sound: "audio/pistol2.mp3",
+        text: "Follow the man’s orders.",
+    },
+    {
+        speaker: "Jill Valentine",
+        bg: "images/lab4.jpg",
+        text: "Not you too, Barry!",
+    },
+    {
+        speaker: "You",
+        bg: "images/lab3.jpg",
+        spriteVisible: false,
+        sprite: "assets/pistol.jpg",
+        spriteVisible: true,
+        text: "Oh, him too. You and Chris are not the only ones held hostage, you know.",
+    },
+    {
+        speaker: "You",
+        bg: "images/black.jpg",
+        spriteVisible: false,
+        text: "Now… It’s time for you all to die.",
+    },
+    {
+        speaker: "You",
+        bg: "images/black.jpg",
+        sound: "audio/tyrant.mp3",
+        text: "...!",
+    },
+    {
+        speaker: "Chris Redfield",
+        bg: "images/black.jpg",
+        text: "Jill, Barry, run!",
+    },
+    {
+        speaker: "You",
+        bg: "images/black.jpg",
+        sound: "audio/impalement.mp3",
+        extra: "The tyrant turned on you, recognizing you as one of its hostile makers.",
+        text: "...",
+    },
+    {
+        speaker: "",
+        bg: "images/black.jpg",
+        text: "End of Chapter 5."
+    },
+
+
+    // chapter 6
+    {
+        chapter: 6,
+        speaker: "You (thoughts)",
+        bg: "images/black.jpg",
+        text: "I'm alive, somehow.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/black.jpg",
+        text: "Birkin saved my life with the t-virus shot he gave me before.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/black.jpg",
+        text: "He knew I was going to be in trouble…",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/black.jpg",
+        text: "Never mind that. Umbrella probably thinks I’m dead.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/black.jpg",
+        text: "This means I can betray them.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/lab5.jpg",
+        sound: "audio/phone.mp3",
+        sprite: "assets/phone.jpg",
+        spriteVisible: true,
+        text: "...",
+    },
+    {
+        speaker: "???",
+        bg: "images/lab5.jpg",
+        text: "Hello?",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/lab5.jpg",
+        extra: "The g, or golgotha virus, is superior to the t-virus in its bioweapon-creating ability.",
+        text: "Ada. Find the g-virus. Bring it to me, ASAP.",
+    },
+    {
+        speaker: "Ada Wong",
+        bg: "images/lab5.jpg",
+        spriteVisible: false,
+        extra: "Switch to Birkin's POV...",
+        text: "Roger, Albert.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/umbrellalab2.jpg",
+        sprite: "assets/gvirus.jpg",
+        spriteVisible: true,
+        text: "I wonder if Wesker is okay. I finished the g-virus we were developing together.",
+    },
+    {
+        speaker: "You (thoughts)",
+        bg: "images/umbrellalab2.jpg",
+        text: "He'd be so proud of me.",
+    },
+    {
+        speaker: "???",
+        bg: "images/umbrellalab2.jpg",
+        text: "U.S. Military here! Put the vial down!",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab2.jpg",
+        text: "What? Why are you here?!",
+    },
+    {
+        speaker: "U.S. Military",
+        bg: "images/umbrellalab2.jpg",
+        extra: "The military discovered that Umbrella had been creating bioweapons, despite Wesker’s efforts to hide it. Sergei Vladimir betrayed Wesker, telling the military about the development of the g-virus.",
+        text: "Stop asking questions. Put it down, or we will shoot!",
+    },
+    {
+        speaker: "You",
+        bg: "images/umbrellalab2.jpg",
+        extra: "From here, nothing is canon.",
+        text: "No! My precious virus! It took me too long to develop!",
+    },
+    { 
+        speaker: "You (thoughts)",
+        bg: "images/umbrellalab2.jpg",
+        spriteVisible: false,
+        text: "When will Wesker come back?",
+    },
+    { 
+        endingStart: true,
+    },
+];  
 
 function renderScene() {
   let scene = story[index];
@@ -1085,6 +1555,13 @@ function renderScene() {
     textBox.innerText = scene.text;
     showHint(scene);
     showExtra(scene); 
+  }
+
+  if (scene.endingStart) {
+    loadChapter6Ending();
+    index++;
+    renderScene();
+    return;
   }
 }
 
@@ -1159,6 +1636,241 @@ function continueStory() {
     }
 
     renderScene();
+}
+
+function loadChapter6Ending() {
+    console.log("Final Scores.");
+    console.log("Influence:", influencePoints);
+    console.log("Morality:", moralityPoints);
+
+    const scoreLabel = `Final Score — Influence: ${influencePoints} | Morality: ${moralityPoints}`;
+    extraLine.removeAttribute("hidden");
+    extraLine.innerText = scoreLabel;
+
+    let ending = [];
+
+    if (influencePoints > moralityPoints) {
+        ending = [
+            {
+                speaker: "You",
+                bg: "images/lab5.jpg",
+                text: "Thank you for the virus, Ada.",
+            },
+            {
+                speaker: "Ada Wong",
+                bg: "images/lab5.jpg",
+                sprite: "sprites/AdaWong.jpg",
+                spriteVisible: true,
+                text: "At your service, Albert.",
+            },
+            {
+                speaker: "Ada Wong",
+                bg: "images/lab5.jpg",
+                text: "However, your friend didn’t survive. He… Injected himself with the other remaining vial of it.",
+            },
+            {
+                speaker: "You (thoughts)",
+                bg: "images/lab5.jpg",
+                text: "What a fool. He knew his immune system wasn't as strong as mine…",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/umbrellalab2.jpg",
+                spriteVisible: false,
+                sprite: "sprites/WilliamBirkin1.jpg",
+                spriteVisible: true,
+                text: "Wesker! No, my colleague!",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/umbrellalab2.jpg",
+                text: "I need to know he’s safe!",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/umbrellalab2.jpg",
+                text: "I need…",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/umbrellalab2.jpg",
+                spriteVisible: false,
+                sprite: "sprites/WilliamBirkin2.jpg",
+                spriteVisible: true,
+                text: "Even if he didn’t save me, I…",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/umbrellalab2.jpg",
+                text: "...I can’t live without him anyways…",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/umbrellalab2.jpg",
+                text: "Farewell, c...cruel wor... world…",
+            },
+            { 
+                speaker: "", 
+                bg: "images/black.jpg", 
+                extra: scoreLabel, 
+                text: "INFLUENCE ENDING: Solo world domination." 
+            },
+        ];
+    } else if (moralityPoints > influencePoints) {
+        ending = [
+            {
+                speaker: "You (thoughts)",
+                bg: "images/umbrellanight.jpg",
+                text: "Birkin.. That idiot’s gotten himself in trouble.",
+            },
+            {
+                speaker: "You (thoughts)",
+                bg: "images/umbrellanight.jpg",
+                text: "Umbrella’s dangerous, but… I need to save Birkin.",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/umbrellalab2.jpg",
+                text: "Wesker!",
+            },
+            {
+                speaker: "You",
+                bg: "images/umbrellalab2.jpg",
+                text: "Birkin, shut up and duck!",
+            },
+            {
+                speaker: "You",
+                bg: "images/umbrellalab2.jpg",
+                sound: "audio/pistol.jpg",
+                text: "Crawl through the vent!",
+            },
+            {
+                speaker: "You",
+                bg: "images/black.jpg",
+                text: "Good, we lost them. You okay, Birkin?",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/black.jpg",
+                text: "Yeah.",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/black.jpg",
+                text: "Why… why would you do that, Wesker?",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/black.jpg",
+                text: "Do what?",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/black.jpg",
+                text: "Save… me?",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/black.jpg",
+                text: "…The g-virus.",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/black.jpg",
+                text: "I couldn’t care less about you.",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/black.jpg",
+                text: "..Aw.",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/black.jpg",
+                text: "..Fine. There’s no one else I would rather dominate the world with.",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/black.jpg",
+                sprite: "assets/gvirus.jpg",
+                spriteVisible: true,
+                text: "And now with this… We have the power to...",
+            },
+            { 
+                speaker: "", 
+                bg: "images/black.jpg", 
+                extra: scoreLabel, 
+                text: "MORALITY ENDING: Joint world domination." 
+            },
+        ];
+    } else {
+        ending = [
+            {
+                speaker: "You (thoughts)",
+                bg: "images/umbrellanight.jpg",
+                text: "Birkin.. That idiot’s gotten himself in trouble.",
+            },
+            {
+                speaker: "You (thoughts)",
+                bg: "images/umbrellanight.jpg",
+                text: "Umbrella’s dangerous, but… I need to save Birkin.",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/umbrellalab2.jpg",
+                text: "Wesker!",
+            },
+            {
+                speaker: "You",
+                bg: "images/umbrellalab2.jpg",
+                text: "Birkin, shut up and duck!",
+            },
+            {
+                speaker: "You",
+                bg: "images/umbrellalab2.jpg",
+                sound: "audio/pistol.jpg",
+                sprite: "sprites/hunk.jpg",
+                spriteVisible: true,
+                text: "Shoot, there’s nowhere to go, we’re cornered…",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/umbrellalab2.jpg",
+                text: "Wesker!... I… I’ll save you! I’ll save us!",
+            },
+            {
+                speaker: "You",
+                bg: "images/umbrellalab2.jpg",
+                text: "Birkin, no, you can’t handle it!",
+            },
+            {
+                speaker: "William Birkin",
+                bg: "images/umbrellalab2.jpg",
+                text: "Wesker, I can’t lose you! Can’t lose this!",
+            },
+            {
+                speaker: "You",
+                bg: "images/umbrellalab2.jpg",
+                sound: "audio/pistol.jpg",
+                text: "Birkin! No!",
+            },
+            {
+                speaker: "",
+                bg: "images/black.jpg",
+                text: "Both of you died tragically. Birkin died from the g-virus taking over his body.. And you were shot dead.",
+            },
+            { 
+                speaker: "", 
+                bg: "images/black.jpg", 
+                extra: scoreLabel, 
+                text: "EQUAL ENDING: No world domination." 
+            },
+        ];
+    }
+
+    for (let i = 0; i < ending.length; i++) {
+        story.splice(index + 1 + i, 0, ending[i]);
+    }
 }
 
 renderScene();
