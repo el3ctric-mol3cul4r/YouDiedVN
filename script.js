@@ -1854,7 +1854,7 @@ function loadChapter6Ending() { // calculates final score and displays one of th
                 speaker: "You",
                 bg: "images/umbrellalab2.jpg",
                 sound: "audio/pistol.jpg",
-                sprite: "sprites/hunk.jpg",
+                sprite: "sprites/Hunk.jpg",
                 spriteVisible: true,
                 text: "Shoot, there’s nowhere to go, we’re cornered…",
             },
