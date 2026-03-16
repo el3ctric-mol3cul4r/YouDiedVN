@@ -4,31 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You Died</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"> <!-- links font -->
+    <link rel="stylesheet" href="style.css"> 
     <script src="script.js" defer></script>
 </head>
 <body>
 
-    <h1>You Died</h1>
+    <h1>You Died</h1> <!-- page title -->
 
     <div class="scene">
-        <div class="scene__bg">
+        <div class="scene__bg"> <!-- holds background image -->
             <img id="background" src="images/dining_hall.jpg" alt="Background">
         </div>
+        <!-- AI css stuff... -->
         <div class="scene__vignette"></div>
         <div class="scene__crest" id="crest">✦ Placeholder ✦</div>
 
-        <div class="speaker">
+        <div class="speaker"> <!-- content in speaker box -->
             <span class="speaker__name" id="speakerName">Placeholder</span>
         </div>
 
-        <div class="scene__sprite hidden">
+        <div class="scene__sprite hidden"> <!-- holds the character sprite -->
             <img id="characterSprite" src="">
         </div>
 
         <div class="dialogue">
-            <p class="dialogue__text" id="mainText">
+            <p class="dialogue__text" id="mainText"> <!-- whatever the scene's dialogue is -->
                 Placeholder
                 <span class="dialogue__cursor"></span>
             </p>
@@ -36,10 +37,10 @@
     </div>
 
     <div class="ui">
-        <p class="ui__hint" id="hintText"></p>
-        <p class="ui__extra" id="extraText"></p>
+        <p class="ui__hint" id="hintText"></p> <!-- whatever the hint is -->
+        <p class="ui__extra" id="extraText"></p> <!-- wahetever the extra is -->
 
-        <div class="ui__buttons">
+        <div class="ui__buttons"> <!-- holds text that goes in buttons when presented -->
             <button id="option1">Option 1</button>
             <button id="option2">Option 2</button>
             <button id="next">Next</button>

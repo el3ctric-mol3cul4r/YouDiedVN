@@ -1,9 +1,14 @@
+// influence: power/ambition points, rude choices
+// morality: ethics points, nicer choices
+// lastChoice: remembers the most recent choice for branch dialogue
+
 let moralityPoints = 0;
 let influencePoints = 0;
-let index = 0;
+let index = 0; // position in the story array
 let lastChoice = null;
 let currentSFX = null;
 
+// kept as references
 const soundeffects = {
     paper: new Audio("audio/rustle.mp3"),
     phone: new Audio("audio/phonering.mp3"),
@@ -15,6 +20,7 @@ const soundeffects = {
     impalement: new Audio("audio/impalement.mp3"),
 };
 
+// dom elements 
 let textBox = document.getElementById("mainText");
 let speakerName = document.getElementById("speakerName");
 let background = document.getElementById("background");
@@ -27,6 +33,7 @@ let b1 = document.getElementById("option1");
 let b2 = document.getElementById("option2");
 let nextButton = document.getElementById("next");
 
+//hide hint, extra, and choice buttons initially
 hintLine.setAttribute("hidden", "hidden");
 extraLine.setAttribute("hidden", "hidden");
 b1.setAttribute("hidden", "hidden");
@@ -35,6 +42,22 @@ b2.setAttribute("hidden", "hidden");
 const sprite = document.getElementById("characterSprite");
 const spriteContainer = sprite.parentElement;
 
+//each object represents a scene
+//   chapter - updates the chapter e.g. "✦ Chapter 1 ✦"
+//   speaker - name shown in the speaker tag
+//   bg - background image
+//   sprite - character sprite image
+//   spriteVisible - true = show sprite, false = hide sprite
+//   text - dialogue text
+//   hint - gameplay hint shown below the scene, usually reminders
+//   extra - lore notes
+//   sound - audio playing during scene
+//   branch - uses text1/text2 based on lastChoice if true
+//   text1 - dialogue shown when lastChoice === "influence"
+//   text2 -dialogue shown when lastChoice === "morality"
+//   choice - adds two choice buttons instead of next if true
+//   options - {text, effect} for the two choices
+//   endingStart - triggers loadChapter6Ending()
 const story = [
     // chapter 1
     {
@@ -1520,27 +1543,29 @@ const story = [
     },
 ];  
 
+// reads the index and updates elements
+// such as the speaker name, background, etc.
 function renderScene() {
   let scene = story[index];
-  if (scene.choice) { 
+  if (scene.choice) {  // if a choice prompt, call showChoices() instead
     showChoices(scene); return; 
   }
 
-  stopSFX();
+  stopSFX(); //stop sound effects before next scene
 
-  if (scene.sound) {
+  if (scene.sound) { // play scene sound effects if clarified
     currentSFX = new Audio(scene.sound);
     currentSFX.play();
   }
 
-  if (scene.chapter) {
+  if (scene.chapter) { // update chapter if new chapter starts
     sceneCrest.innerText = `✦ Chapter ${scene.chapter} ✦`;
   }
 
-  speakerName.innerText = scene.speaker;
+  speakerName.innerText = scene.speaker; // update speaker and background image
   background.src = scene.bg;
 
-  if (scene.spriteVisible && scene.sprite) {
+  if (scene.spriteVisible && scene.sprite) { // show or hide character sprite 
     sprite.src = scene.sprite;
     spriteContainer.classList.remove("hidden");
   } else if (scene.spriteVisible === false) {
@@ -1548,7 +1573,7 @@ function renderScene() {
   }
 
   
-  if (scene.branch) {
+  if (scene.branch) { // display dialogue based on lastChoice
     let branchText = lastChoice === "morality" ? scene.text2 : scene.text1;
     textBox.innerText = branchText;
   } else {
@@ -1557,7 +1582,7 @@ function renderScene() {
     showExtra(scene); 
   }
 
-  if (scene.endingStart) {
+  if (scene.endingStart) { 
     loadChapter6Ending();
     index++;
     renderScene();
@@ -1565,7 +1590,7 @@ function renderScene() {
   }
 }
 
-function stopSFX() {
+function stopSFX() { // pause and reset sound effect at the start of every rendered scene
     if (currentSFX) {
         currentSFX.pause();
         currentSFX.currentTime = 0;
@@ -1573,7 +1598,7 @@ function stopSFX() {
     }
 }
 
-nextButton.onclick = function () {
+nextButton.onclick = function () { // advances index by 1 and renders the next scene.
     index++;
     if (index >= story.length) {
         textBox.innerText = "End.";
@@ -1584,7 +1609,7 @@ nextButton.onclick = function () {
     renderScene();
 };
 
-function showChoices(scene) {
+function showChoices(scene) { // hides the Next button and shows the two option buttons. each button calls its effect and then resumes story with continueStory()
     nextButton.setAttribute("hidden", "hidden");
     b1.removeAttribute("hidden");
     b2.removeAttribute("hidden");
@@ -1602,7 +1627,7 @@ function showChoices(scene) {
     };
 }
 
-function showHint(scene) {
+function showHint(scene) { // shows hints in scenes with hints
     if (scene.hint) {
         hintLine.removeAttribute("hidden");
         hintLine.innerText = scene.hint;
@@ -1611,7 +1636,7 @@ function showHint(scene) {
     }
 }
 
-function showExtra(scene) {
+function showExtra(scene) { // shows extra notes in scenes with extra
     if (scene.extra) {
         extraLine.removeAttribute("hidden");
         extraLine.innerText = scene.extra;
@@ -1620,7 +1645,7 @@ function showExtra(scene) {
     }
 }
 
-function continueStory() {
+function continueStory() { // called after a choice is made. hides choice buttons and reshows next
     b1.setAttribute("hidden", "hidden");
     b2.setAttribute("hidden", "hidden");
     nextButton.removeAttribute("hidden");
@@ -1638,7 +1663,7 @@ function continueStory() {
     renderScene();
 }
 
-function loadChapter6Ending() {
+function loadChapter6Ending() { // calculates final score and displays one of three endings.
     console.log("Final Scores.");
     console.log("Influence:", influencePoints);
     console.log("Morality:", moralityPoints);
@@ -1868,9 +1893,9 @@ function loadChapter6Ending() {
         ];
     }
 
-    for (let i = 0; i < ending.length; i++) {
+    for (let i = 0; i < ending.length; i++) { // splice the ending scenes into the story array immediately after the current index
         story.splice(index + 1 + i, 0, ending[i]);
     }
 }
 
-renderScene();
+renderScene(); // render first scene on page load
