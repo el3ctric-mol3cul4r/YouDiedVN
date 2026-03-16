@@ -1353,6 +1353,7 @@ const story = [
     {
         speaker: "You (thoughts)",
         bg: "images/black.jpg",
+        spriteVisible: false,
         text: "...",
     },
     {
@@ -1777,6 +1778,8 @@ function loadChapter6Ending() { // calculates final score and displays one of th
             {
                 speaker: "William Birkin",
                 bg: "images/black.jpg",
+                sprite: "sprites/WilliamBirkin1.jpg",
+                spriteVisible: true,
                 text: "Yeah.",
             },
             {
@@ -1785,7 +1788,7 @@ function loadChapter6Ending() { // calculates final score and displays one of th
                 text: "Why… why would you do that, Wesker?",
             },
             {
-                speaker: "William Birkin",
+                speaker: "You",
                 bg: "images/black.jpg",
                 text: "Do what?",
             },
@@ -1795,12 +1798,12 @@ function loadChapter6Ending() { // calculates final score and displays one of th
                 text: "Save… me?",
             },
             {
-                speaker: "William Birkin",
+                speaker: "You",
                 bg: "images/black.jpg",
                 text: "…The g-virus.",
             },
             {
-                speaker: "William Birkin",
+                speaker: "You",
                 bg: "images/black.jpg",
                 text: "I couldn’t care less about you.",
             },
@@ -1810,12 +1813,13 @@ function loadChapter6Ending() { // calculates final score and displays one of th
                 text: "..Aw.",
             },
             {
-                speaker: "William Birkin",
+                speaker: "You",
                 bg: "images/black.jpg",
+                spriteVisible: false,
                 text: "..Fine. There’s no one else I would rather dominate the world with.",
             },
             {
-                speaker: "William Birkin",
+                speaker: "You",
                 bg: "images/black.jpg",
                 sprite: "assets/gvirus.jpg",
                 spriteVisible: true,
